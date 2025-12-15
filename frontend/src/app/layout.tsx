@@ -1,5 +1,15 @@
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ClerkProvider } from '@clerk/nextjs';
+import NeuralBackground from '../components/NeuralBackground'; // Import the new one
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "Codex",
+  description: "AI Video Intelligence",
+};
 
 export default function RootLayout({
   children,
@@ -9,25 +19,15 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className="bg-slate-950 text-white">
-            <nav className="p-4 border-b border-slate-800 flex justify-between items-center">
-                <div className="font-bold text-xl">🧠 Codex</div>
-                <div>
-                    <SignedOut>
-                        <SignInButton mode="modal">
-                            <button className="bg-blue-600 px-4 py-2 rounded">Sign In</button>
-                        </SignInButton>
-                    </SignedOut>
-                    <SignedIn>
-                        <UserButton />
-                    </SignedIn>
-                </div>
-            </nav>
-            <main className="p-8">
+        <body className={`${inter.className} bg-black text-white antialiased`}>
+            {/* The Canvas sits behind everything */}
+            <NeuralBackground />
+            {/* Main Content sits on top */}
+            <div className="relative z-10">
                 {children}
-            </main>
+            </div>
         </body>
       </html>
     </ClerkProvider>
-  )
+  );
 }
