@@ -25,6 +25,7 @@ const formatTime = (seconds: number) => {
 interface VideoModalProps {
     video: any;
     onClose: () => void;
+    startTime?: string;
 }
 
 export default function VideoModal({ video, startTime, onClose }: VideoModalProps) {
